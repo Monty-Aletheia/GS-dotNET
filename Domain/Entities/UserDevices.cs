@@ -27,14 +27,6 @@ namespace Domain.Entities
         [Required]
         [Column("consumption")]
         public double Consumption { get; set; }
-
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Column("created_at")]
-        public DateTime CreatedAt { get; set; }
-
-        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
-        [Column("updated_at")]
-        public DateTime UpdatedAt { get; set; }
     }
 }
 

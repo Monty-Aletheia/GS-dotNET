@@ -25,13 +25,5 @@ namespace Domain.Entities
         public double PowerRating { get; set; }
 
         public ICollection<UserDevice> UserDevices { get; set; } = new List<UserDevice>();
-
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Column("created_at")]
-        public DateTime CreatedAt { get; set; }
-
-        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
-        [Column("updated_at")]
-        public DateTime UpdatedAt { get; set; }
     }
 }

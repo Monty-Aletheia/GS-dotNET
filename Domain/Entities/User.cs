@@ -23,11 +23,5 @@ namespace Domain.Entities
         public string FirebaseId { get; set; }
 
         public ICollection<UserDevice> UserDevices { get; set; } = new List<UserDevice>();
-
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public DateTime CreatedAt { get; set; }
-
-        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
-        public DateTime UpdatedAt { get; set; }
     }
 }
