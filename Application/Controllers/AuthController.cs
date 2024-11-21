@@ -16,12 +16,13 @@ namespace Application.Controllers
             _authService = authService;
         }
 
-        // POST /api/auth/register
-        // Registers a new user.
-        // Request Body: UserRequestDTO (email, password, firebaseId [optional])
-        // Responses:
-        //   201: User successfully registered.
-        //   400: Email or FirebaseId already in use.
+        /// <summary>
+        /// Registra um novo usuário.
+        /// </summary>
+        /// <param name="registerDTO">Informações do usuário para registro</param>
+        /// <returns>Um código 201 se o usuário for registrado com sucesso</returns>
+        /// <response code="201">Usuário registrado com sucesso</response>
+        /// <response code="400">Email ou FirebaseId já estão em uso</response>
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] UserRequestDTO registerDTO)
         {
@@ -29,13 +30,14 @@ namespace Application.Controllers
             return CreatedAtAction(nameof(Register), result);
         }
 
-        // POST /api/auth/login
-        // Logs in an existing user.
-        // Request Body: LoginRequestDTO (email, password)
-        // Responses:
-        //   200: Login successful, returns user details.
-        //   404: User not found.
-        //   401: Invalid credentials.
+        /// <summary>
+        /// Realiza o login de um usuário existente.
+        /// </summary>
+        /// <param name="loginDTO">Credenciais do usuário</param>
+        /// <returns>Detalhes do usuário se o login for bem-sucedido</returns>
+        /// <response code="200">Login bem-sucedido</response>
+        /// <response code="404">Usuário não encontrado</response>
+        /// <response code="401">Credenciais inválidas</response>
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginRequestDTO loginDTO)
         {

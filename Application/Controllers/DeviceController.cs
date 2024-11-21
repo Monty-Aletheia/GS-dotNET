@@ -1,5 +1,4 @@
 ﻿using Application.Dtos.Device;
-using Application.Exceptions;
 using Application.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,10 +15,11 @@ namespace Application.Controllers
             _deviceService = deviceService;
         }
 
-        // GET /api/devices
-        // Retrieves a list of all devices.
-        // Responses:
-        //   200: Returns the list of devices.
+        /// <summary>
+        /// Obtém a lista de todos os dispositivos.
+        /// </summary>
+        /// <returns>Lista de dispositivos.</returns>
+        /// <response code="200">Retorna a lista de dispositivos.</response>
         [HttpGet]
         public async Task<ActionResult<List<DeviceResponseDTO>>> GetDevices()
         {
@@ -27,13 +27,13 @@ namespace Application.Controllers
             return Ok(devices);
         }
 
-        // GET /api/devices/{id}
-        // Retrieves a device by its unique identifier (ID).
-        // Parameters:
-        //   id (Guid): The device's unique identifier (UUID).
-        // Responses:
-        //   200: Returns the device with the specified ID.
-        //   404: If the device is not found.
+        /// <summary>
+        /// Obtém um dispositivo pelo seu identificador único (ID).
+        /// </summary>
+        /// <param name="id">Identificador único do dispositivo (UUID).</param>
+        /// <returns>O dispositivo com o ID especificado.</returns>
+        /// <response code="200">Retorna o dispositivo com o ID especificado.</response>
+        /// <response code="404">Se o dispositivo não for encontrado.</response>
         [HttpGet("{id}")]
         public async Task<ActionResult<DeviceResponseDTO>> GetDeviceById(Guid id)
         {
@@ -41,11 +41,12 @@ namespace Application.Controllers
             return Ok(device);
         }
 
-        // POST /api/devices
-        // Creates a new device.
-        // Request Body: DeviceRequestDTO (device details)
-        // Responses:
-        //   201: Device created successfully, returns the device details.
+        /// <summary>
+        /// Cria um novo dispositivo.
+        /// </summary>
+        /// <param name="deviceRequestDTO">Detalhes do dispositivo a ser criado.</param>
+        /// <returns>O dispositivo criado com os detalhes.</returns>
+        /// <response code="201">Dispositivo criado com sucesso.</response>
         [HttpPost]
         public async Task<ActionResult<DeviceResponseDTO>> CreateDevice([FromBody] DeviceRequestDTO deviceRequestDTO)
         {
@@ -53,14 +54,14 @@ namespace Application.Controllers
             return CreatedAtAction(nameof(GetDeviceById), new { id = createdDevice.Id }, createdDevice);
         }
 
-        // PUT /api/devices/{id}
-        // Updates an existing device's information.
-        // Parameters:
-        //   id (Guid): The device's unique identifier (UUID).
-        //   deviceRequestDTO (DeviceRequestDTO): The updated device data.
-        // Responses:
-        //   200: Returns the updated device.
-        //   404: If the device is not found.
+        /// <summary>
+        /// Atualiza as informações de um dispositivo existente.
+        /// </summary>
+        /// <param name="id">Identificador único do dispositivo (UUID).</param>
+        /// <param name="deviceRequestDTO">Dados atualizados do dispositivo.</param>
+        /// <returns>O dispositivo atualizado.</returns>
+        /// <response code="200">Retorna o dispositivo atualizado.</response>
+        /// <response code="404">Se o dispositivo não for encontrado.</response>
         [HttpPut("{id}")]
         public async Task<ActionResult<DeviceResponseDTO>> UpdateDevice(Guid id, [FromBody] DeviceRequestDTO deviceRequestDTO)
         {
@@ -68,18 +69,18 @@ namespace Application.Controllers
             return Ok(updatedDevice);
         }
 
-        // DELETE /api/devices/{id}
-        // Deletes a device by its unique identifier (ID).
-        // Parameters:
-        //   id (Guid): The device's unique identifier (UUID).
-        // Responses:
-        //   204: If the device was successfully deleted.
-        //   404: If the device is not found.
+        /// <summary>
+        /// Deleta um dispositivo pelo seu identificador único (ID).
+        /// </summary>
+        /// <param name="id">Identificador único do dispositivo (UUID).</param>
+        /// <returns>Resultado da exclusão.</returns>
+        /// <response code="204">Dispositivo deletado com sucesso.</response>
+        /// <response code="404">Se o dispositivo não for encontrado.</response>
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteDevice(Guid id)
         {
             await _deviceService.DeleteDeviceAsync(id);
-            return NoContent(); 
+            return NoContent();
         }
     }
 }

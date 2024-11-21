@@ -15,10 +15,11 @@ namespace Application.Controllers
             _userService = userService;
         }
 
-        // GET /api/users
-        // Retrieves a list of all users.
-        // Responses:
-        //   200: Returns the list of users.
+        /// <summary>
+        /// Obtém a lista de todos os usuários.
+        /// </summary>
+        /// <returns>Lista de usuários.</returns>
+        /// <response code="200">Retorna a lista de usuários.</response>
         [HttpGet]
         public async Task<ActionResult<List<UserResponseDTO>>> GetAllUsers()
         {
@@ -26,13 +27,13 @@ namespace Application.Controllers
             return Ok(users);
         }
 
-        // GET /api/users/{id}
-        // Retrieves a user by its unique identifier (ID).
-        // Parameters:
-        //   id (Guid): The user's unique identifier (UUID).
-        // Responses:
-        //   200: Returns the user with the specified ID.
-        //   404: If the user is not found.
+        /// <summary>
+        /// Obtém um usuário pelo seu identificador único (ID).
+        /// </summary>
+        /// <param name="id">Identificador único do usuário (UUID).</param>
+        /// <returns>O usuário com o ID especificado.</returns>
+        /// <response code="200">Retorna o usuário com o ID especificado.</response>
+        /// <response code="404">Se o usuário não for encontrado.</response>
         [HttpGet("{id}")]
         public async Task<ActionResult<UserResponseDTO>> GetUserById(Guid id)
         {
@@ -40,13 +41,13 @@ namespace Application.Controllers
             return Ok(user);
         }
 
-        // GET /api/users/firebase/{firebaseId}
-        // Retrieves a user by Firebase ID.
-        // Parameters:
-        //   firebaseId (string): The Firebase ID of the user.
-        // Responses:
-        //   200: Returns the user with the specified Firebase ID.
-        //   404: If the user is not found.
+        /// <summary>
+        /// Obtém um usuário pelo seu Firebase ID.
+        /// </summary>
+        /// <param name="firebaseId">O Firebase ID do usuário.</param>
+        /// <returns>O usuário com o Firebase ID especificado.</returns>
+        /// <response code="200">Retorna o usuário com o Firebase ID especificado.</response>
+        /// <response code="404">Se o usuário não for encontrado.</response>
         [HttpGet("firebase/{firebaseId}")]
         public async Task<ActionResult<UserResponseDTO>> GetUserByFirebaseId(string firebaseId)
         {
@@ -54,14 +55,14 @@ namespace Application.Controllers
             return Ok(user);
         }
 
-        // PUT /api/users/{id}
-        // Updates an existing user's information.
-        // Parameters:
-        //   id (Guid): The user's unique identifier (UUID).
-        //   userRequestDTO (UserRequestDTO): The updated user data.
-        // Responses:
-        //   200: Returns the updated user.
-        //   404: If the user is not found.
+        /// <summary>
+        /// Atualiza as informações de um usuário existente.
+        /// </summary>
+        /// <param name="id">Identificador único do usuário (UUID).</param>
+        /// <param name="userRequestDTO">Dados atualizados do usuário.</param>
+        /// <returns>O usuário atualizado.</returns>
+        /// <response code="200">Retorna o usuário atualizado.</response>
+        /// <response code="404">Se o usuário não for encontrado.</response>
         [HttpPut("{id}")]
         public async Task<ActionResult<UserResponseDTO>> UpdateUser(Guid id, UserRequestDTO userRequestDTO)
         {
@@ -69,18 +70,18 @@ namespace Application.Controllers
             return Ok(updatedUser);
         }
 
-        // DELETE /api/users/{id}
-        // Deletes a user by its unique identifier (ID).
-        // Parameters:
-        //   id (Guid): The user's unique identifier (UUID).
-        // Responses:
-        //   204: If the user was successfully deleted.
-        //   404: If the user is not found.
+        /// <summary>
+        /// Deleta um usuário pelo seu identificador único (ID).
+        /// </summary>
+        /// <param name="id">Identificador único do usuário (UUID).</param>
+        /// <returns>Resultado da exclusão.</returns>
+        /// <response code="204">Usuário deletado com sucesso.</response>
+        /// <response code="404">Se o usuário não for encontrado.</response>
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteUser(Guid id)
         {
             await _userService.DeleteUserAsync(id);
-            return NoContent(); // 204 No Content
+            return NoContent(); 
         }
     }
 }

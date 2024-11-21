@@ -4,6 +4,7 @@ using Application.Services.Profiles;
 using Infra.Data;
 using Infra.Repositories;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +13,9 @@ builder.Services.AddDbContext<FIAPDbContext>(options =>
 {
     options.UseOracle(builder.Configuration.GetConnectionString("OracleFIAPDbContext"));
 });
+
+
+// DI 
 
 builder.Services.AddScoped<UserRepository>();
 builder.Services.AddScoped<DeviceRepository>();
@@ -24,6 +28,9 @@ builder.Services.AddScoped<AuthService>();
 builder.Services.AddScoped<DeviceService>();
 builder.Services.AddScoped<UserDeviceService>();
 
+// swagger
+var swaggerConfig = builder.Configuration.GetSection("Swagger");
+
 builder.Services.AddControllers(options =>
 {
     options.Filters.Add<GlobalExceptionFilter>();
@@ -31,7 +38,18 @@ builder.Services.AddControllers(options =>
 
 // Learn more about c onfiguring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(options =>
+{
+    options.SwaggerDoc("v1", new OpenApiInfo
+    {
+        Title = swaggerConfig["Title"],
+        Description = swaggerConfig["Description"],
+    });
+
+    var xmlFile = Path.Combine(AppContext.BaseDirectory, "WindRose.xml");
+    var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+    options.IncludeXmlComments(xmlPath);
+});
 
 var app = builder.Build();
     
