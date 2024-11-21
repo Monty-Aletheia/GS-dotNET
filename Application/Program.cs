@@ -17,11 +17,12 @@ builder.Services.AddScoped<UserRepository>();
 builder.Services.AddScoped<DeviceRepository>();
 builder.Services.AddScoped<UserDeviceRepository>();
 
-builder.Services.AddAutoMapper(typeof(DeviceProfile), typeof(UserProfile));
+builder.Services.AddAutoMapper(typeof(DeviceProfile), typeof(UserProfile), typeof(UserDeviceProfile));
 
 builder.Services.AddScoped<UserService>();
 builder.Services.AddScoped<AuthService>();
 builder.Services.AddScoped<DeviceService>();
+builder.Services.AddScoped<UserDeviceService>();
 
 builder.Services.AddControllers(options =>
 {

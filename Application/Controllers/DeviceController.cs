@@ -37,15 +37,8 @@ namespace Application.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<DeviceResponseDTO>> GetDeviceById(Guid id)
         {
-            try
-            {
-                var device = await _deviceService.GetDeviceByIdAsync(id);
-                return Ok(device);
-            }
-            catch (NotFoundException)
-            {
-                return NotFound(new { message = "Device not found" });
-            }
+            var device = await _deviceService.GetDeviceByIdAsync(id);
+            return Ok(device);
         }
 
         // POST /api/devices
@@ -71,15 +64,8 @@ namespace Application.Controllers
         [HttpPut("{id}")]
         public async Task<ActionResult<DeviceResponseDTO>> UpdateDevice(Guid id, [FromBody] DeviceRequestDTO deviceRequestDTO)
         {
-            try
-            {
-                var updatedDevice = await _deviceService.UpdateDeviceAsync(id, deviceRequestDTO);
-                return Ok(updatedDevice);
-            }
-            catch (NotFoundException)
-            {
-                return NotFound(new { message = "Device not found" });
-            }
+            var updatedDevice = await _deviceService.UpdateDeviceAsync(id, deviceRequestDTO);
+            return Ok(updatedDevice);
         }
 
         // DELETE /api/devices/{id}
@@ -92,15 +78,8 @@ namespace Application.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteDevice(Guid id)
         {
-            try
-            {
-                await _deviceService.DeleteDeviceAsync(id);
-                return NoContent(); // 204 No Content
-            }
-            catch (NotFoundException)
-            {
-                return NotFound(new { message = "Device not found" });
-            }
+            await _deviceService.DeleteDeviceAsync(id);
+            return NoContent(); 
         }
     }
 }

@@ -12,6 +12,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Itens de Solução", "Itens de Solução", "{2E466CF9-0673-4CCF-807A-8C756BBEB85D}"
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
+		..\..\..\Desktop\Seila\TCC-Senai\docker\dockerfile = ..\..\..\Desktop\Seila\TCC-Senai\docker\dockerfile
 	EndProjectSection
 EndProject
 Global
